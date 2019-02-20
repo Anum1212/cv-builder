@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 02</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="css/template02.css">
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <section class="top flex-it flex-row flex-justify-between">
+
+      <div class="left flex-it flex-col flex-justify-end">
+        <h1 id="user-name"></h1>
+        <h2  id="user-applyingAs"></h2>
+      </div><!-- /left -->
+
+      <div class="right">
+       <img id="user-image" src="" alt="">
+      </div><!-- /right -->
+
+    </section><!-- /top -->
+
+    <section class="columns flex-it">
+      <section class="alpha flex-it flex-col flex-justify-between">
+
+        <div class="row">
+          <h3>&nbsp;</h3>
+          <p id="user-email"></p>
+          <p id="user-address"></p>
+          <p id="user-contact"></p>
+        </div><!-- /row -->
+
+      </section><!-- /alpha -->
+
+      <section class="beta">
+
+        <div class="row">
+          <h3>Summary</h3>
+          <p id="user-aboutMe"></p>
+        </div><!-- /row -->
+
+        <h3>Experience</h3>
+        <div class="row" id="user-work-experience">
+        </div><!-- /row -->
+
+        <h3>Skills</h3>
+        <div class="row">
+          <ul id="user-skill"></ul>
+        </div><!-- /row -->
+
+        <h3>Languages</h3>
+        <div class="row">
+          <ul id="user-language"></ul>
+        </div><!-- /row -->
+
+        <h3>Education</h3>
+        <div class="row" id="user-education"></div>
+
+      </section><!-- /beta -->
+    </section><!-- /columns -->
+  </div><!-- /wrapper -->
+
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
+
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+
+  <script>
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '<div class="job"><h4>'+$.localStorage('job')[i]+'</h4><h5>'+$.localStorage('company')[i]+'</h5><h6><time>'+$.localStorage('jobStart')[i]+'</time> – <time>'+$.localStorage('jobEnd')[i]+'</time></h6><p>'+$.localStorage('jobDescription')[i]+'</p></div>'
+      );
+    });
+
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '<li>' + $.localStorage('skillName')[i] + '</li>'
+      );
+    });
+
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li>' + $.localStorage('languageName')[i] + '</li>'
+      );
+    });
+
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '<div class="course"><h5>'+$.localStorage('degreeName')[i]+'<span class="sub-text">, '+$.localStorage('instituteName')[i]+'</span>  <time>'+$.localStorage('degreeStart')[i]+'</time> – <time>'+$.localStorage('degreeEnd')[i]+'</time></h5><h6></h6></div>'
+      );
+    });
+  </script>
+</body>
+
+</html>

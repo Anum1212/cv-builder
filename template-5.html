@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 05</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="css/template05.css">
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div class="resume-container">
+    <article>
+      <header role="banner">
+        <img id="user-image" src="" class="resume-image" />
+        <h1 id="user-name"></h1>
+        <h2 id="user-aboutMe"></h2>
+        <address class="contact-info">
+          <span class="phone-number" id="user-contact"></span>
+          <span class="email-address" id="user-address"></span>
+        </address>
+      </header>
+      <section class="education-section">
+        <h1>Education</h1>
+        <ul id="user-education">
+        </ul>
+      </section>
+      <section class="languages-section">
+        <h1>Skills</h1>
+        <ul id="user-skill" class="languages-list"></ul>
+      </section>
+      <section class="languages-section">
+        <h1>Languages</h1>
+        <ul  id="user-language" class="languages-list"></ul>
+      </section>
+      <section class="experience-section">
+        <h1>Professional Work Experience</h1>
+        <ul id="user-work-experience" class="work-experience-list"></ul>
+      </section>
+    </article>
+  </div>
+
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
+
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+
+  <script>
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '<li><div class="organization-heading"><h2 class="organization-name"> '+$.localStorage('company')[i]+'</h2></div><span class="organization-dates">'+$.localStorage('jobStart')[i]+' - '+$.localStorage('jobEnd')[i]+'</span><div><h3 class="position-title">'+$.localStorage('job')[i]+'</h3><p> '+$.localStorage('jobDescription')[i]+' </p></div></li>'
+      );
+    });
+
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '<li class="language-tool-column"><h3 class="language-name">'+$.localStorage('skillName')[i]+'</h2></li>'
+      );
+    });
+
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li class="language-tool-column"><h3 class="language-name">'+$.localStorage('languageName')[i]+'</h3></li>'
+      );
+    });
+
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '          <li><h2>'+$.localStorage('degreeName')[i]+'</h2><div class="school-name-location-date-container"><span>, '+$.localStorage('instituteName')[i]+'</span>, <span class="school-dates">'+$.localStorage('degreeStart')[i]+' - '+$.localStorage('degreeEnd')[i]+'</span></div></li>'
+      );
+    });
+  </script>
+
+  
+</body>
+</html>

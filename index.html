@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Cv Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--  ---------------------------------------------------------------------------- -->
+    <!-- Personal Details -->
+    <!--  ---------------------------------------------------------------------------- -->
+    <div class="header">
+        <div class="row">
+            <div class="hidden-xs col-sm-4">
+                <img src="images/circle-design.png" alt="">
+            </div>
+            <div class="col-xs-4">
+                <img src="images/logo.png" alt="">
+            </div>
+            <div class="hidden-xs col-sm-4">
+                <img src="images/circle-design.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Personal Details</div>
+            <div class="panel-body">
+
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input required type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview" style="background-image: url(https://source.unsplash.com/WLUHO9A_xik);">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" value="" placeholder="Name"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-4 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="email" name="email" value="" placeholder="Email"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-4 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control inputFilterer" id="address" name="address" value=""
+                            placeholder="Address" required>
+                    </div>
+                </div>
+                <div class="col-sm-4 nopadding">
+                    <div class="form-group">
+                        <input type="number" class="form-control inputFilterer" id="contact" name="contact" value=""
+                            placeholder="Contact #" required>
+                    </div>
+                </div>
+                <div class="col-sm-4 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="applyingAs" name="applyingAs" value="" placeholder="Applying As"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-12 nopadding">
+                    <div class="form-group">
+                        <textarea class="form-control" id="aboutMe" name="aboutMe" rows="5" placeholder="About Me"
+                            required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ---------------------------------------------------------------------------- -->
+        <!-- Skills -->
+        <!--  ---------------------------------------------------------------------------- -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Skills</div>
+            <div class="panel-body">
+                <div class="col-sm-6 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="skillName" name="skillName[]" value="" placeholder="Skill"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-6 nopadding">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control inputFilterer" id="skillLvl" name="skillLvl[]" value=""
+                                placeholder="Level" required>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="skill_fields();"> <span class="glyphicon glyphicon-plus"
+                                        aria-hidden="true"></span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Fields Appear here -->
+                <div id="skill_fields">
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ---------------------------------------------------------------------------- -->
+        <!-- Language -->
+        <!--  ---------------------------------------------------------------------------- -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Languages</div>
+            <div class="panel-body">
+                <div class="col-sm-6 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="languageName" name="languageName[]" value=""
+                            placeholder="Language" required>
+                    </div>
+                </div>
+                <div class="col-sm-6 nopadding">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control inputFilterer" id="languageLvl" name="languageLvl[]"
+                                value="" placeholder="Level" required>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="language_fields();"> <span class="glyphicon glyphicon-plus"
+                                        aria-hidden="true"></span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Fields Appear here -->
+                <div id="language_fields">
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ---------------------------------------------------------------------------- -->
+        <!-- Work Experience -->
+        <!--  ---------------------------------------------------------------------------- -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Work Experience</div>
+            <div class="panel-body">
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="job" name="job[]" value="" placeholder="Job"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="company" name="company[]" value="" placeholder="Company"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="number" class="form-control inputFilterer" id="jobStart" name="jobStart[]" value=""
+                            placeholder="Start" required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control inputFilterer" id="jobEnd" name="jobEnd[]" value=""
+                                placeholder="End" required>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="workExperience_fields();"> <span
+                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 nopadding">
+                    <div class="form-group">
+                        <textarea class="form-control" id="jobDescription" name="jobDescription[]" rows="5" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Work Experience Fields Appear here -->
+                <div id="workExperience_fields">
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ---------------------------------------------------------------------------- -->
+        <!-- Education -->
+        <!--  ---------------------------------------------------------------------------- -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Education</div>
+            <div class="panel-body">
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="institute" name="institute[]" value="" placeholder="Institute"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="degree" name="degree[]" value="" placeholder="Degree"
+                            required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <input type="number" class="form-control inputFilterer" id="degreeStart" name="degreeStart[]"
+                            value="" placeholder="Start" required>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="number" class="form-control inputFilterer" id="degreeEnd" name="degreeEnd[]"
+                                value="" placeholder="End" required>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success" type="button" onclick="education_fields();"> <span
+                                        class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Fields Appear here -->
+                <div id="education_fields">
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!--  ---------------------------------------------------------------------------- -->
+        <!-- Template Select -->
+        <!--  ---------------------------------------------------------------------------- -->
+        <div class="panel panel-default">
+            <div class="panel-heading">Template Select</div>
+            <div class="panel-body">
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-1">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 1</h2><span class="card__subtitle"><a href="https://codepen.io/etreacy/pen/EbWmbY"
+                                target="_blank">By
+                                Eric Treacy</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-2">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 2</h2><span class="card__subtitle"><a href="https://codepen.io/marcelodavanzo/pen/LVwvmJ"
+                                target="_blank">By
+                                Marcelo Davanzo</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-3">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 3</h2><span class="card__subtitle"><a href="https://codepen.io/nodws/pen/EmvwrZ"
+                                target="_blank">By
+                                Nodws</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-4">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 4</h2><span class="card__subtitle"><a href="https://codepen.io/xichen/pen/wzpZrr"
+                                target="_blank">By
+                                XiChen</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-5">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 5</h2><span class="card__subtitle"><a href="https://codepen.io/awilt/pen/JdKVyE"
+                                target="_blank">By
+                                Amie Wilt</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-6">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 6</h2><span class="card__subtitle"><a href="https://codepen.io/dudleystorey/pen/NqaYxy"
+                                target="_blank">By
+                                Dudley Storey</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-7">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 7</h2><span class="card__subtitle"><a href="https://codepen.io/jimboobrien/pen/XXPwMe"
+                                target="_blank">By
+                                James M Obrien</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-8">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 8</h2><span class="card__subtitle"><a href="https://codepen.io/elmsoftware/pen/BuxcH"
+                                target="_blank">By
+                                John Lueders</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-9">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 9</h2><span class="card__subtitle"><a href="https://codepen.io/TimDaub/pen/bfCLz"
+                                target="_blank">By
+                                Tim Daubenschütz</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-10">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 10</h2><span class="card__subtitle"><a href="https://codepen.io/anupamapanchal/pen/oBNPda"
+                                target="_blank">By
+                                Anupama Panchal</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-11">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 11</h2><span class="card__subtitle"><a href="https://codepen.io/awinnett/pen/vZgqZd"
+                                target="_blank">By
+                                Austin</a> </span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 nopadding">
+                    <div class="card card--small select_template" template="template-12">
+                        <div class="card__image" style="background-image: url(https://placeimg.com/640/480/nature);"></div>
+                        <h2 class="card__title">Template 12</h2><span class="card__subtitle"><a href="https://www.w3schools.com/w3css/tryw3css_templates_cv.htm"
+                                target="_blank">By
+                                W3School</a> </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Save Button -->
+        <div class="cv-create-btn">
+            <button class="btn btn-primary" type="button" onclick="save();">CREATE MY CV</button>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+<div class="footer">
+   <h4>Made by <br> <b>Anum Amir</b> </h4>
+   <h5>anamamer0@gmail.com</h5>
+</div>
+
+    <!--  ---------------------------------------------------------------------------- -->
+    <!-- Script -->
+    <!--  ---------------------------------------------------------------------------- -->
+
+    <script src="js/jquery.storage.js"></script>
+    <script type="text/javascript">
+        // ----------------------------------------------------------------------------
+        // Variable Declaration
+        // ----------------------------------------------------------------------------
+        var skillIndex = 1;
+        var languageIndex = 1;
+        var workIndex = 1;
+        var educationIndex = 1;
+        var template_url = 'null';
+        // for using in local storage
+        var imagePath = '';
+
+
+
+        // ----------------------------------------------------------------------------
+        // Preview Uploaded Image
+        // ----------------------------------------------------------------------------
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                    imagePath = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+
+
+
+        // ----------------------------------------------------------------------------
+        // Restricts input for each element in the set of matched elements to the given inputFilter.
+        // ----------------------------------------------------------------------------
+        (function ($) {
+            $.fn.inputFilter = function (inputFilter) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                    if (inputFilter(this.value)) {
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    }
+                });
+            };
+        }(jQuery));
+
+        // ----------------------------------------------------------------------------
+        // Install input filters.
+        // ----------------------------------------------------------------------------
+        $(".inputFilterer").inputFilter(function (value) {
+            return /^\d*$/.test(value);
+        });
+
+
+
+        // ----------------------------------------------------------------------------
+        // Add skill field
+        // ----------------------------------------------------------------------------
+        function skill_fields() {
+            skillIndex++;
+            var objTo = document.getElementById("skill_fields");
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "form-group removeSkillClass" + skillIndex);
+            var rdiv = "removeSkillClass" + skillIndex;
+            divtest.innerHTML =
+                '<div class="col-sm-6 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="skillName" name="skillName[]" value="" placeholder="Skill"></div></div><div class="col-sm-6 nopadding"><div class="form-group"><div class="input-group"><input required type="number" class="form-control" id="skillLvl" name="skillLvl[]" value="" placeholder="Level"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_skill_fields(' +
+                skillIndex +
+                ');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="clear"></div>';
+
+            objTo.appendChild(divtest);
+        }
+
+        // ----------------------------------------------------------------------------
+        // remove skill field
+        // ----------------------------------------------------------------------------
+        function remove_skill_fields(rid) {
+            $(".removeSkillClass" + rid).remove();
+        }
+
+
+
+        // ----------------------------------------------------------------------------
+        // Add language field
+        // ----------------------------------------------------------------------------
+        function language_fields() {
+            languageIndex++;
+            var objTo = document.getElementById("language_fields");
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "form-group removeLanguageClass" + languageIndex);
+            var rdiv = "removeLanguageClass" + languageIndex;
+            divtest.innerHTML =
+                '<div class="col-sm-6 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="languageName" name="languageName[]" value="" placeholder="language"></div></div><div class="col-sm-6 nopadding"><div class="form-group"><div class="input-group"><input required type="number" class="form-control" id="languageLvl" name="languageLvl[]" value="" placeholder="Level"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_language_fields(' +
+                languageIndex +
+                ');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="clear"></div>';
+
+            objTo.appendChild(divtest);
+        }
+
+        // ----------------------------------------------------------------------------
+        // remove language field
+        // ----------------------------------------------------------------------------
+        function remove_language_fields(rid) {
+            $(".removeLanguageClass" + rid).remove();
+        }
+
+
+
+        // ----------------------------------------------------------------------------
+        // Add work experience field
+        // ----------------------------------------------------------------------------
+        function workExperience_fields() {
+            workIndex++;
+            var objTo = document.getElementById("workExperience_fields");
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "form-group removeWorkExperienceClass" + workIndex);
+            var rdiv = "removeWorkExperienceClass" + workIndex;
+            divtest.innerHTML =
+                '<div class="col-sm-3 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="job" name="job[]" value="" placeholder="Job"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="company" name="company[]" value="" placeholder="Company"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input required type="number" class="form-control inputFilterer" id="jobStart" name="jobStart[]" value="" placeholder="Start"></div></div><div class="col-sm-3 nopadding"><div class="form-group"><div class="input-group"><input required type="number" class="form-control inputFilterer" id="jobEnd" name="jobEnd[]" value="" placeholder="End"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_workExperience_fields(' +
+                workIndex +
+                ');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="col-sm-12 nopadding"><div class="form-group"><textarea class="form-control" id="jobDescription" name="jobDescription[]" rows="5"></textarea></div></div><div class="clear"></div>';
+            objTo.appendChild(divtest);
+            // ----------------------------------------------------------------------------
+            // Install input filters.
+            // ----------------------------------------------------------------------------
+            $(".inputFilterer").inputFilter(function (value) {
+                return /^\d*$/.test(value);
+            });
+        }
+
+        // ----------------------------------------------------------------------------
+        // remove workExperience field
+        // ----------------------------------------------------------------------------
+        function remove_workExperience_fields(rid) {
+            $(".removeWorkExperienceClass" + rid).remove();
+        }
+
+
+
+        // ----------------------------------------------------------------------------
+        // Add education field
+        // ----------------------------------------------------------------------------
+        function education_fields() {
+            educationIndex++;
+            var objTo = document.getElementById("education_fields");
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "form-group removeEducationClass" + educationIndex);
+            var rdiv = "removeEducationClass" + educationIndex;
+            divtest.innerHTML =
+                '<div class="col-sm-3 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="institute" name="institute[]" value="" placeholder="Institute"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input required type="text" class="form-control" id="degree" name="degree[]" value="" placeholder="Degree"></div></div><div class="col-sm-3 nopadding"><div class="form-group"> <input required type="number" class="form-control inputFilterer" id="degreeStart" name="degreeStart[]" value="" placeholder="Start"></div></div><div class="col-sm-3 nopadding"><div class="form-group"><div class="input-group"><input required type="number" class="form-control inputFilterer" id="degreeEnd" name="degreeEnd[]" value="" placeholder="End"><div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_education_fields(' +
+                educationIndex +
+                ');"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button></div></div></div></div><div class="clear"></div>';
+
+            objTo.appendChild(divtest);
+            // ----------------------------------------------------------------------------
+            // Install input filters.
+            // ----------------------------------------------------------------------------
+            $(".inputFilterer").inputFilter(function (value) {
+                return /^\d*$/.test(value);
+            });
+        }
+
+        // ----------------------------------------------------------------------------
+        // Add education field
+        // ----------------------------------------------------------------------------
+        function remove_education_fields(rid) {
+            $(".removeEducationClass" + rid).remove();
+        }
+        
+
+
+        // ----------------------------------------------------------------------------
+        // Select Template
+        // ----------------------------------------------------------------------------
+        $(".select_template").click(function () {
+            $(".select_template").removeClass("active");
+            $(this).addClass("active");
+            template_url = $(this).attr("template");
+            template_url = template_url + '.html';
+        });
+
+
+
+        // ----------------------------------------------------------------------------
+        // Save
+        // ----------------------------------------------------------------------------
+        function save() {
+
+            // ----------------------------------------------------------------------------
+            // Check if all fields are filled
+            // ----------------------------------------------------------------------------
+            var required = $('input,textarea,file').filter('[required]:visible');
+            var allRequired = true;
+            required.each(function () {
+                if ($(this).val() == '') {
+                    allRequired = false;
+                }
+            });
+
+            if (!allRequired) {
+                alert('fill all fields')
+            }
+
+            // ----------------------------------------------------------------------------
+            // Personal Details
+            // ----------------------------------------------------------------------------
+            var name = $('input[name="name"]').val();
+
+            var email = $('input[name="email"]').val();
+
+            var address = $('input[name="address"]').val();
+
+            var contact = $('input[name="contact"]').val();
+
+            var applyingAs = $('input[name="applyingAs"]').val();
+
+            var aboutMe = $('textarea[name="aboutMe"]').val();
+
+            // ----------------------------------------------------------------------------
+            // Skills
+            // ----------------------------------------------------------------------------
+            var skillName = $('input[name="skillName[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var skillLvl = $('input[name="skillLvl[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            // ----------------------------------------------------------------------------
+            // Language
+            // ----------------------------------------------------------------------------
+            var languageName = $('input[name="languageName[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var languageLvl = $('input[name="languageLvl[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            // ----------------------------------------------------------------------------
+            // Work Experience
+            // ----------------------------------------------------------------------------
+            var job = $('input[name="job[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var company = $('input[name="company[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var jobStart = $('input[name="jobStart[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var jobEnd = $('input[name="jobEnd[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var jobDescription = $('textarea[name="jobDescription[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            // ----------------------------------------------------------------------------
+            // Education
+            // ----------------------------------------------------------------------------
+            var instituteName = $('input[name="institute[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var degreeName = $('input[name="degree[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var degreeStart = $('input[name="degreeStart[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            var degreeEnd = $('input[name="degreeEnd[]"]').map(function () {
+                return this.value;
+            }).get();
+
+            $.localStorage('image', imagePath);
+            $.localStorage('name', name);
+            $.localStorage('email', email);
+            $.localStorage('address', address);
+            $.localStorage('contact', contact);
+            $.localStorage('applyingAs', applyingAs);
+            $.localStorage('aboutMe', aboutMe);
+            $.localStorage('skillName', skillName);
+            $.localStorage('skillLvl', skillLvl);
+            $.localStorage('languageName', languageName);
+            $.localStorage('languageLvl', languageLvl);
+            $.localStorage('job', job);
+            $.localStorage('company', company);
+            $.localStorage('jobStart', jobStart);
+            $.localStorage('jobEnd', jobEnd);
+            $.localStorage('jobDescription', jobDescription);
+            $.localStorage('instituteName', instituteName);
+            $.localStorage('degreeName', degreeName);
+            $.localStorage('degreeStart', degreeStart);
+            $.localStorage('degreeEnd', degreeEnd);
+
+            check if template selected
+            if (template_url == 'null')
+                alert('Select a Template');
+            else
+                window.open(template_url);
+        }
+    </script>
+</body>
+
+</html>

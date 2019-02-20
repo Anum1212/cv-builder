@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 01</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/template01.css">
+  <script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div id="drag" class="cv instaFade wrap">
+    <div class="mainDetails">
+      <div id="headshot" class="">
+        <img id="user-image" src="" />
+      </div>
+
+      <div id="name">
+        <h1 class="quickFade delayTwo" id="user-name"></h1>
+        <h4 class="quickFade delayTwo" id="user-email"></h4>
+        <h4 class="quickFade delayThree" id="user-address"></h4>
+        <h4 class="quickFade delayThree" id="user-contact"></h4>
+        <h4 class="quickFade delayThree" id="user-applyingAs"></h4>
+      </div>
+
+      <div id="contactDetails" class="quickFade delayFour">
+        <ul>
+
+          <!-- <li><a href="//linkedin.com/in/jennifermogan" title="LinkedIn"><i class="fa fa-print" aria-hidden="true"></i></a></li>-->
+          <!-- <li><a href="//linkedin.com/in/jennifermogan" title="LinkedIn"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li> -->
+
+        </ul>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div id="mainArea" class="quickFade delayFive">
+
+      <section>
+        <article>
+          <div class="sectionTitle">
+            <h1>Personal Profile</h1>
+          </div>
+
+          <div class="sectionContent">
+            <p id="user-aboutMe"></p>
+          </div>
+        </article>
+        <div class="clear"></div>
+      </section>
+
+
+      <section>
+        <div class="sectionTitle">
+          <h1>Work Experience</h1>
+        </div>
+
+        <div class="sectionContent" id="user-work-experience">
+        </div>
+
+        <div class="clear"></div>
+      </section>
+
+
+      <section>
+        <div class="sectionTitle">
+          <h1>Key Skills</h1>
+        </div>
+
+        <div class="sectionContent">
+          <ul class="list" id="user-skill">
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </section>
+
+
+      <section>
+        <div class="sectionTitle">
+          <h1>Language</h1>
+        </div>
+
+        <div class="sectionContent">
+          <ul class="list" id="user-language">
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </section>
+
+
+      <section id="Education">
+        <div class="sectionTitle">
+          <h1>Education</h1>
+        </div>
+
+        <div class="sectionContent" id="user-education">
+        </div>
+        <div class="clear"></div>
+      </section>
+
+    </div>
+  </div>
+
+
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
+
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+
+  <script>
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '<article><h2>' + $.localStorage('job')[i] + '</h2><h3>' + $.localStorage('company')[i] +
+        '</h3><p class="subDetails">' + $.localStorage('jobStart')[i] + ' - ' + $.localStorage('jobEnd')[i] +
+        '</p><p>' + $.localStorage('jobDescription')[i] + '</p></article>'
+      );
+    });
+
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '<li>' + $.localStorage('skillName')[i] + '</li>'
+      );
+    });
+
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li>' + $.localStorage('languageName')[i] + '</li>'
+      );
+    });
+
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '<article><h2>'+$.localStorage('instituteName')[i]+'</h2><p class="subDetails">'+$.localStorage('degreeName')[i]+'</p></article>'
+      );
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 06</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="css/template06.css">
+<script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div id="resume">
+    <img  id="user-image" src="">
+    <h1 id="user-name"></h1>
+    <p>Email: <span class="personalDetails" id="user-email"></span></p>
+    <p>Address: <span class="personalDetails" id="user-address"></span></p>
+    <p>Cell: <span class="personalDetails" id="user-contact"></span></p>
+          <p  id="user-aboutMe" class="objective"></p>
+            <dl>
+              <dt>Education
+              <dd id="user-education"></dd>
+              </dt>
+            </dl>
+            <dl>
+              <dt>Skills
+                <dd>
+                  <ul id="user-skill"></ul>
+                  </dd>
+                  </dt>
+            </dl>
+            <dl>
+              <dt>Languages
+                <dd>
+                  <ul id="user-language"></ul>
+                  </dd>
+                  </dt>
+            </dl>
+            <dl>
+              <dt>Experience
+              <dd id="user-work-experience"></dd>
+              </dt>
+            </dl>
+</div> 
+
+<!--  ---------------------------------------------------------------------------- -->
+<!-- Script -->
+<!--  ---------------------------------------------------------------------------- -->
+
+<script src="js/jquery.storage.js"></script>
+<script src="js/storageCall.js"></script>
+
+<script>
+  // work experience
+  $.each($.localStorage('job'), function (i) {
+    $("#user-work-experience").append(
+      '                <h2>'+$.localStorage('company')[i]+'<span>'+$.localStorage('jobStart')[i]+' – '+$.localStorage('jobEnd')[i]+'</span></h2><ul><li>'+$.localStorage('jobDescription')[i]+'</li></ul>'
+    );
+  });
+
+  // skills
+  $.each($.localStorage('skillName'), function (i) {
+    $("#user-skill").append(
+        '<li>'+$.localStorage('skillName')[i]+'</li>'
+    );
+  });
+
+  // languages
+  $.each($.localStorage('languageName'), function (i) {
+    $("#user-language").append(
+      '<li>'+$.localStorage('languageName')[i]+'</li>'
+    );
+  });
+
+  // education
+  $.each($.localStorage('instituteName'), function (i) {
+    $("#user-education").append(
+      '<h2> '+$.localStorage('instituteName')[i]+'</h2><p><strong>Major:</strong>'+$.localStorage('degreeName')[i]+'</p>'
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 04</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://fonts.googleapis.com/css?family=Ubuntu">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://s.plurk.com/0e89357f530f0a843c68440a020d4eb5.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/template04.css">
+  <script src="js/jquery.js"></script>
+</head>
+
+<body>
+  <div class="resume">
+    <div class="base">
+      <div class="profile">
+        <div class="photo"><img id="user-image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/764024/profile/profile-512.jpg" /></div>
+        <div class="info">
+          <h4 class="name" id="user-name"></h4><small class="job" id="user-applyingAs"></small>
+        </div>
+      </div>
+      <div class="about">
+        <h3>About me</h3><span id="user-aboutMe"></span>
+      </div>
+      <div class="contact">
+        <h3>Contact</h3>
+        <div class="call"><i class="fa fa-phone"></i><span id="user-contact"></span></div>
+        <div class="address"><i class="fa fa-map-marker"></i><span id="user-address"></span></div>
+        <div class="email"><i class="fa fa-envelope"></i><span id="user-email"></span></div>
+      </div>
+    </div>
+    <div class="func">
+      <div class="work">
+        <h3><i class="fa fa-briefcase"></i>Work Experience</h3>
+        <ul id="user-work-experience"></ul>
+      </div>
+      <div class="edu">
+        <h3><i class="fa fa-graduation-cap"></i>Education</h3>
+        <ul id="user-education"></ul>
+      </div>
+      <div class="skills-prog">
+        <h3><i class="fa fa-code"></i>Skills</h3>
+        <ul id="user-skill"></ul>
+      </div>
+      <div class="skills-soft">
+        <h3><i class="fa fa-th-list"></i>Languages</h3>
+        <ul id="user-language"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
+
+  <script src="js/jquery.storage.js"></script>
+
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
+
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+
+  <script>
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '<li><span> ' + $.localStorage('job')[i] + '</span><small> ' + $.localStorage('jobStart')[i] + ' -  ' + $.localStorage(
+          'jobEnd')[i] + '</small></li>'
+      );
+    });
+
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '          <li data-percent=' + $.localStorage('skillLvl')[i] + '><span>' + $.localStorage('skillName')[i] +
+        '</span><div class="skills-bar"><div class="bar"></div></div></li>'
+      );
+    });
+
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li data-percent=' + $.localStorage('languageLvl')[i] +
+        '><svg viewbox="0 0 100 100"><circle cx="50" cy="50" r="45"></circle><circle class="cbar" cx="50" cy="50" r="45"></circle></svg><span>' +
+        $.localStorage('languageName')[i] + '</span><small></small></li>'
+      );
+    });
+
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '<li><span>' + $.localStorage('instituteName')[i] + '</span><small>' + $.localStorage('degreeStart')[i] + ' - ' +
+        $.localStorage('degreeEnd')[i] + '</small></li>'
+      );
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      (function () {
+        $('.skills-prog li').find('.skills-bar').each(function (i) {
+          $(this).find('.bar').delay(i * 150).animate({
+            width: $(this).parents().attr('data-percent') + '%'
+          }, 1000, 'linear', function () {
+            return $(this).css({
+              'transition-duration': '.5s'
+            });
+          });
+        });
+
+        $('.skills-soft li').find('svg').each(function (i) {
+          var c, cbar, circle, percent, r;
+          circle = $(this).children('.cbar');
+          r = circle.attr('r');
+          c = Math.PI * (r * 2);
+          percent = $(this).parent().data('percent');
+          cbar = ((100 - percent) / 100) * c;
+          circle.css({
+            'stroke-dashoffset': c,
+            'stroke-dasharray': c
+          });
+          circle.delay(i * 150).animate({
+            strokeDashoffset: cbar
+          }, 1000, 'linear', function () {
+            return circle.css({
+              'transition-duration': '.3s'
+            });
+          });
+          $(this).siblings('small').prop('Counter', 0).delay(i * 150).animate({
+            Counter: percent
+          }, {
+            duration: 1000,
+            step: function (now) {
+              return $(this).text(Math.ceil(now) + '%');
+            }
+          });
+        });
+
+      }).call(this);
+    });
+  </script>
+</body>
+
+
+</html>
