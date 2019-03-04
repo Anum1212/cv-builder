@@ -1,131 +1,170 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CV-Template 09</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" media="screen" href="css/template09.css">
-<script src="js/jquery.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CV-Template 09</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/template09.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
+  <script src="js/jquery.js"></script>
 </head>
+
 <body>
-    <div class="resume-wrapper">
-  <article class="paper">
-    <header>
-      <div class="header-content">
-        <div class="header-pic" title="Wiggle Wiggle">
-          <div class="pic">
-            <img id="user-image" src="" alt="">
+  <div id="cv" class="resume-wrapper">
+    <article class="paper">
+      <header>
+        <div class="header-content">
+          <div class="header-pic" title="Wiggle Wiggle">
+            <div class="pic">
+              <img id="user-image" src="" alt="">
+            </div>
+          </div>
+          <div class="header-text">
+            <p id="user-name"></p>
+            <p class="subtitle">Bachelor of Science (almost)</p>
           </div>
         </div>
-        <div class="header-text">
-          <p id="user-name"></p>
-          <p class="subtitle">Bachelor of Science (almost)</p>
-        </div>
+      </header>
+
+      <div class="content-wrapper">
+
+        <!-- CONTACT -->
+        <section class="content">
+          <div class="row">
+            <div class="content-cat">
+              Contact
+            </div>
+            <div class="content-text">
+              <ul>
+                <li>Email</li>
+                <li id="user-email"></li>
+              </ul>
+              <ul>
+                <li>Address</li>
+                <li id="user-address"></li>
+              </ul>
+              <ul>
+                <li>Phone</li>
+                <li id="user-contact"></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="content" id="user-work-experience">
+          <hr>
+        </section>
+
+
+        <section class="content" id="user-education"></section>
+
+
+        <section class="content">
+          <div class="row">
+            <div class="content-cat big-text">
+              Skills
+            </div>
+            <div class="content-text skills-listing">
+              <ul id="user-skill">
+              </ul>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="content">
+          <div class="row">
+            <div class="content-cat big-text">
+              Languages
+            </div>
+            <div class="content-text skills-listing">
+              <ul id="user-language">
+              </ul>
+            </div>
+          </div>
+        </section>
+
       </div>
-    </header>
-    
-    <div class="content-wrapper">
-    
-      <!-- CONTACT -->
-      <section class="content">
-        <div class="row">
-          <div class="content-cat">
-           Contact
-          </div>
-          <div class="content-text">
-            <ul>
-              <li>Email</li>
-              <li id="user-email"></li>
-            </ul>
-            <ul>
-              <li>Address</li>
-              <li id="user-address"></li>
-            </ul>
-            <ul>
-              <li>Phone</li>
-              <li id="user-contact"></li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      <section class="content" id="user-work-experience">
-        <hr>
-      </section>
+    </article>
 
+  </div>
 
-      <section class="content" id="user-education"></section>
+  <div class="buttonDownloadContainer">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a id="printCVBtn" class="buttonDownload">Download</a>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
 
-      <section class="content">
-        <div class="row">
-          <div class="content-cat big-text">
-            Skills
-          </div>
-          <div class="content-text skills-listing">
-            <ul id="user-skill">
-            </ul>
-          </div>
-        </div>
-      </section>
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="/js/html2canvas.js"></script>
+  <script>
+    // print script
+    $("#printCVBtn").click(function () {
 
+      var cvHeight = $("#cv").outerHeight(true);
 
-      <section class="content">
-        <div class="row">
-          <div class="content-cat big-text">
-            Languages
-          </div>
-          <div class="content-text skills-listing">
-            <ul id="user-language">
-            </ul>
-          </div>
-        </div>
-      </section>
-    
-    </div>
-      
-  </article>
-  
-</div>
+      const filename = 'cv.pdf';
 
-<!--  ---------------------------------------------------------------------------- -->
-<!-- Script -->
-<!--  ---------------------------------------------------------------------------- -->
+      html2canvas(document.querySelector('#cv'), {
+        height: cvHeight + 300
+      }).then(canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save(filename);
+      });
+    });
 
-<script src="js/jquery.storage.js"></script>
-<script src="js/storageCall.js"></script>
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '<div class="row"><div class="content-cat big-text">' + $.localStorage('company')[i] + '<p>' + $.localStorage(
+          'jobStart')[i] + ' till ' + $.localStorage('jobEnd')[i] +
+        '</p></div><div class="content-text work-listing"><p style="text-decoration: underline;"> <b> ' + $.localStorage(
+          'job')[i] + ' </b></p><p class="highlight">' + $.localStorage('jobDescription')[i] + '</p></div></div>'
+      );
+    });
 
-<script>
-  // work experience
-  $.each($.localStorage('job'), function (i) {
-    $("#user-work-experience").append(
-      '<div class="row"><div class="content-cat big-text">'+$.localStorage('company')[i]+'<p>'+$.localStorage('jobStart')[i]+' till '+$.localStorage('jobEnd')[i]+'</p></div><div class="content-text work-listing"><p style="text-decoration: underline;"> <b> '+$.localStorage('job')[i]+' </b></p><p class="highlight">'+$.localStorage('jobDescription')[i]+'</p></div></div>'
-    );
-  });
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '<li>' + $.localStorage('skillName')[i] + '</li>'
+      );
+    });
 
-  // skills
-  $.each($.localStorage('skillName'), function (i) {
-    $("#user-skill").append(
-      '<li>'+$.localStorage('skillName')[i]+'</li>'
-    );
-  });
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li>' + $.localStorage('languageName')[i] + '</li>'
+      );
+    });
 
-  // languages
-  $.each($.localStorage('languageName'), function (i) {
-    $("#user-language").append(
-      '<li>'+$.localStorage('languageName')[i]+'</li>'
-    );
-  });
-
-  // education
-  $.each($.localStorage('instituteName'), function (i) {
-    $("#user-education").append(
-      '<div class="row"><div class="content-cat big-text">'+$.localStorage('degreeName')[i]+'<p>'+$.localStorage('degreeStart')[i]+' till '+$.localStorage('degreeEnd')[i]+'</p></div><div class="content-text work-listing"><p style="text-decoration: underline;"> <b> '+$.localStorage('instituteName')[i]+' </b></p></div></div>'
-    );
-  });
-</script>
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '<div class="row"><div class="content-cat big-text">' + $.localStorage('degreeName')[i] + '<p>' + $.localStorage(
+          'degreeStart')[i] + ' till ' + $.localStorage('degreeEnd')[i] +
+        '</p></div><div class="content-text work-listing"><p style="text-decoration: underline;"> <b> ' + $.localStorage(
+          'instituteName')[i] + ' </b></p></div></div>'
+      );
+    });
+  </script>
 
 
 </body>
+
 </html>

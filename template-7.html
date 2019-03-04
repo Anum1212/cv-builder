@@ -8,12 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" media="screen" href="css/template07.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/jquery.js"></script>
 </head>
 
 <body>
-  <div class="container">
+  <div id="cv" class="container">
     <div id="resume-container" class="clearfix">
       <!-- start of resume-->
       <header class="header">
@@ -89,14 +90,43 @@
     </div><!-- end resume -->
   </div>
 
+  <div class="buttonDownloadContainer">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a id="printCVBtn" class="buttonDownload">Download</a>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
   <!--  ---------------------------------------------------------------------------- -->
   <!-- Script -->
   <!--  ---------------------------------------------------------------------------- -->
 
   <script src="js/jquery.storage.js"></script>
   <script src="js/storageCall.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="/js/html2canvas.js"></script>
   <script>
+    // print script
+    $("#printCVBtn").click(function () {
+
+      var cvHeight = $("#cv").outerHeight(true);
+
+      const filename = 'cv.pdf';
+
+      html2canvas(document.querySelector('#cv'), {
+        height: cvHeight + 300
+      }).then(canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save(filename);
+      });
+    });
+
     // work experience
     $.each($.localStorage('job'), function (i) {
       $("#user-work-experience").append(
@@ -129,7 +159,8 @@
       $("#user-education").append(
         '<div class="past-school row"><div class="col-md-4 left"><h3 class="school-name">' + $.localStorage(
           'instituteName')[i] + '</h3><br></div><div class="col-md-8 "><h4 class="position">' + $.localStorage(
-          'degreeName')[i] + '</h4><i>' + $.localStorage('degreeStart')[i] + ' - ' + $.localStorage('degreeEnd')[i] +
+          'degreeName')[i] + '</h4><i>' + $.localStorage('degreeStart')[i] + ' - ' + $.localStorage('degreeEnd')[
+          i] +
         '</i></div></div>'
       );
     });

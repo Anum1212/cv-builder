@@ -6,24 +6,14 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="css/template12.css">
+<link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
 <script src="js/jquery.js"></script>
-<style>
-  html,
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Roboto", sans-serif
-  }
-</style>
 
 <body class="w3-light-grey">
 
   <!-- Page Container -->
-  <div class="w3-content w3-margin-top" style="max-width:1400px;">
+  <div id="cv" class="w3-content w3-margin-top" style="max-width:1400px;">
 
     <!-- The Grid -->
     <div class="w3-row-padding">
@@ -82,6 +72,17 @@
     <!-- End Page Container -->
   </div>
 
+  <div class="buttonDownloadContainer">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a id="printCVBtn" class="buttonDownload">Download</a>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 
   <!--  ---------------------------------------------------------------------------- -->
   <!-- Script -->
@@ -89,8 +90,25 @@
 
   <script src="js/jquery.storage.js"></script>
   <script src="js/storageCall.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="/js/html2canvas.js"></script>
   <script>
+    // print script
+    $("#printCVBtn").click(function () {
+
+      var cvHeight = $("#cv").outerHeight(true);
+
+      const filename = 'cv.pdf';
+
+      html2canvas(document.querySelector('#cv'), {
+        height: cvHeight + 300
+      }).then(canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save(filename);
+      });
+    });
+
     // work experience
     $.each($.localStorage('job'), function (i) {
       $("#user-work-experience").append(

@@ -67,7 +67,7 @@ h5 { font-weight: bold; }
 	
 		#experience .past-employer { padding: 20px 0; }
 		#experience .employer-img { display: block; margin: 0 auto; padding-top: 20px; }
-		#experience .short-description { /* padding-top: 20px; */ }
+		/* #experience .short-description { padding-top: 20px; } */
 		
 		
 		#education { padding: 0 20px; }

@@ -10,73 +10,88 @@
     <script src="https://use.fontawesome.com/334b91c43a.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/template11.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
     <script src="js/jquery.js"></script>
 </head>
 
 <body>
 
 
-    <div class="header">
+    <div id="cv">
+        <div class="header">
 
-        <div class="header__name">
-            <h1 id="user-name"></h1>
-            <h2 id="user-applyingAs"></h2>
-        </div> <!-- /.header__name -->
+            <div class="header__name">
+                <h1 id="user-name"></h1>
+                <h2 id="user-applyingAs"></h2>
+            </div> <!-- /.header__name -->
 
-        <div class="header__contact">
+            <div class="header__contact">
 
-            <div class="header__contact-field">
-                <span class="header__contact-label">Email: </span>
-                <a id="user-email" class="header__contact-value"></a>
-            </div>
-            <div class="header__contact-field">
-                <span class="header__contact-label">Address: </span>
-                <a id="user-address" class="header__contact-value"></a>
-            </div>
-            <div class="header__contact-field">
-                <span class="header__contact-label">Phone: </span>
-                <a id="user-contact" class="header__contact-value"></a>
-            </div> <!-- /.header__contact-field -->
+                <div class="header__contact-field">
+                    <span class="header__contact-label">Email: </span>
+                    <a id="user-email" class="header__contact-value"></a>
+                </div>
+                <div class="header__contact-field">
+                    <span class="header__contact-label">Address: </span>
+                    <a id="user-address" class="header__contact-value"></a>
+                </div>
+                <div class="header__contact-field">
+                    <span class="header__contact-label">Phone: </span>
+                    <a id="user-contact" class="header__contact-value"></a>
+                </div> <!-- /.header__contact-field -->
 
-        </div> <!-- /.header__contact -->
+            </div> <!-- /.header__contact -->
 
-    </div> <!-- /.header -->
+        </div> <!-- /.header -->
 
-    <div class="resume-body">
+        <div class="resume-body">
 
-        <div class="resume-body__left">
+            <div class="resume-body__left">
 
-            <div class="experience-list">
-                <h2>Education</h2>
+                <div class="experience-list">
+                    <h2>Education</h2>
 
-                <div class="experience" id="user-education"></div> <!-- /.experience -->
+                    <div class="experience" id="user-education"></div> <!-- /.experience -->
 
-            </div>
+                </div>
 
-            <!-- /.experience-list -->
-            <div class="experience-list">
-                <h2>Work Experience</h2>
-                <div id="user-work-experience"></div>
-            </div> <!-- /.experience-list -->
+                <!-- /.experience-list -->
+                <div class="experience-list">
+                    <h2>Work Experience</h2>
+                    <div id="user-work-experience"></div>
+                </div> <!-- /.experience-list -->
 
-        </div> <!-- /.resume-body__left -->
+            </div> <!-- /.resume-body__left -->
 
-        <div class="resume-body__right">
+            <div class="resume-body__right">
 
-            <div class="skill-breakdown">
-                <h2>Skills</h2>
-                <div id="user-skill"></div>
-            </div>
+                <div class="skill-breakdown">
+                    <h2>Skills</h2>
+                    <div id="user-skill"></div>
+                </div>
 
-            <div class="skill-breakdown">
-                <h2>Languages</h2>
-                <div id="user-language"></div>
-            </div>
+                <div class="skill-breakdown">
+                    <h2>Languages</h2>
+                    <div id="user-language"></div>
+                </div>
 
 
-        </div> <!-- /.resume-body__right -->
+            </div> <!-- /.resume-body__right -->
 
-    </div> <!-- /.resume-body -->
+        </div> <!-- /.resume-body -->
+    </div>
+
+    <div class="buttonDownloadContainer">
+        <br>
+        <br>
+        <br>
+        <br>
+        <a id="printCVBtn" class="buttonDownload">Download</a>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
 
     <!--  ---------------------------------------------------------------------------- -->
     <!-- Script -->
@@ -84,8 +99,25 @@
 
     <script src="js/jquery.storage.js"></script>
     <script src="js/storageCall.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="/js/html2canvas.js"></script>
     <script>
+        // print script
+        $("#printCVBtn").click(function () {
+
+            var cvHeight = $("#cv").outerHeight(true);
+
+            const filename = 'cv.pdf';
+
+            html2canvas(document.querySelector('#cv'), {
+                height: cvHeight + 300
+            }).then(canvas => {
+                let pdf = new jsPDF('p', 'mm', 'a4');
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+                pdf.save(filename);
+            });
+        });
+
         // work experience
         $.each($.localStorage('job'), function (i) {
             $("#user-work-experience").append(

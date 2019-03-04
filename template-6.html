@@ -6,80 +6,114 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CV-Template 06</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" media="screen" href="css/template06.css">
-<script src="js/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/template06.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
+  <script src="js/jquery.js"></script>
 </head>
 
 <body>
-  <div id="resume">
-    <img  id="user-image" src="">
-    <h1 id="user-name"></h1>
-    <p>Email: <span class="personalDetails" id="user-email"></span></p>
-    <p>Address: <span class="personalDetails" id="user-address"></span></p>
-    <p>Cell: <span class="personalDetails" id="user-contact"></span></p>
-          <p  id="user-aboutMe" class="objective"></p>
-            <dl>
-              <dt>Education
-              <dd id="user-education"></dd>
-              </dt>
-            </dl>
-            <dl>
-              <dt>Skills
-                <dd>
-                  <ul id="user-skill"></ul>
-                  </dd>
-                  </dt>
-            </dl>
-            <dl>
-              <dt>Languages
-                <dd>
-                  <ul id="user-language"></ul>
-                  </dd>
-                  </dt>
-            </dl>
-            <dl>
-              <dt>Experience
-              <dd id="user-work-experience"></dd>
-              </dt>
-            </dl>
-</div> 
+  <div id="cv">
+    <div id="resume">
+      <img id="user-image" src="">
+      <h1 id="user-name"></h1>
+      <p>Email: <span class="personalDetails" id="user-email"></span></p>
+      <p>Address: <span class="personalDetails" id="user-address"></span></p>
+      <p>Cell: <span class="personalDetails" id="user-contact"></span></p>
+      <p id="user-aboutMe" class="objective"></p>
+      <dl>
+        <dt>Education
+        <dd id="user-education"></dd>
+        </dt>
+      </dl>
+      <dl>
+        <dt>Skills
+        <dd>
+          <ul id="user-skill"></ul>
+        </dd>
+        </dt>
+      </dl>
+      <dl>
+        <dt>Languages
+        <dd>
+          <ul id="user-language"></ul>
+        </dd>
+        </dt>
+      </dl>
+      <dl>
+        <dt>Experience
+        <dd id="user-work-experience"></dd>
+        </dt>
+      </dl>
+    </div>
+  </div>
 
-<!--  ---------------------------------------------------------------------------- -->
-<!-- Script -->
-<!--  ---------------------------------------------------------------------------- -->
+  <div class="buttonDownloadContainer">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a id="printCVBtn" class="buttonDownload">Download</a>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 
-<script src="js/jquery.storage.js"></script>
-<script src="js/storageCall.js"></script>
+  <!--  ---------------------------------------------------------------------------- -->
+  <!-- Script -->
+  <!--  ---------------------------------------------------------------------------- -->
 
-<script>
-  // work experience
-  $.each($.localStorage('job'), function (i) {
-    $("#user-work-experience").append(
-      '                <h2>'+$.localStorage('company')[i]+'<span>'+$.localStorage('jobStart')[i]+' – '+$.localStorage('jobEnd')[i]+'</span></h2><ul><li>'+$.localStorage('jobDescription')[i]+'</li></ul>'
-    );
-  });
+  <script src="js/jquery.storage.js"></script>
+  <script src="js/storageCall.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="/js/html2canvas.js"></script>
+  <script>
+    // print script
+    $("#printCVBtn").click(function () {
 
-  // skills
-  $.each($.localStorage('skillName'), function (i) {
-    $("#user-skill").append(
-        '<li>'+$.localStorage('skillName')[i]+'</li>'
-    );
-  });
+      var cvHeight = $("#cv").outerHeight(true);
 
-  // languages
-  $.each($.localStorage('languageName'), function (i) {
-    $("#user-language").append(
-      '<li>'+$.localStorage('languageName')[i]+'</li>'
-    );
-  });
+      const filename = 'cv.pdf';
 
-  // education
-  $.each($.localStorage('instituteName'), function (i) {
-    $("#user-education").append(
-      '<h2> '+$.localStorage('instituteName')[i]+'</h2><p><strong>Major:</strong>'+$.localStorage('degreeName')[i]+'</p>'
-    );
-  });
-</script>
+      html2canvas(document.querySelector('#cv'), {
+        height: cvHeight + 300
+      }).then(canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save(filename);
+      });
+    });
+
+    // work experience
+    $.each($.localStorage('job'), function (i) {
+      $("#user-work-experience").append(
+        '                <h2>' + $.localStorage('company')[i] + '<span>' + $.localStorage('jobStart')[i] + ' – ' +
+        $.localStorage('jobEnd')[i] + '</span></h2><ul><li>' + $.localStorage('jobDescription')[i] + '</li></ul>'
+      );
+    });
+
+    // skills
+    $.each($.localStorage('skillName'), function (i) {
+      $("#user-skill").append(
+        '<li>' + $.localStorage('skillName')[i] + '</li>'
+      );
+    });
+
+    // languages
+    $.each($.localStorage('languageName'), function (i) {
+      $("#user-language").append(
+        '<li>' + $.localStorage('languageName')[i] + '</li>'
+      );
+    });
+
+    // education
+    $.each($.localStorage('instituteName'), function (i) {
+      $("#user-education").append(
+        '<h2> ' + $.localStorage('instituteName')[i] + '</h2><p><strong>Major:</strong>' + $.localStorage(
+          'degreeName')[i] + '</p>'
+      );
+    });
+  </script>
 
 
 </body>

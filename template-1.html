@@ -7,36 +7,28 @@
   <title>CV-Template 01</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/template01.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
   <script src="js/jquery.js"></script>
 </head>
 
 <body>
-  <div id="drag" class="cv instaFade wrap">
+  <div id="cv" class="cv wrap">
     <div class="mainDetails">
       <div id="headshot" class="">
         <img id="user-image" src="" />
       </div>
 
       <div id="name">
-        <h1 class="quickFade delayTwo" id="user-name"></h1>
-        <h4 class="quickFade delayTwo" id="user-email"></h4>
-        <h4 class="quickFade delayThree" id="user-address"></h4>
-        <h4 class="quickFade delayThree" id="user-contact"></h4>
-        <h4 class="quickFade delayThree" id="user-applyingAs"></h4>
-      </div>
-
-      <div id="contactDetails" class="quickFade delayFour">
-        <ul>
-
-          <!-- <li><a href="//linkedin.com/in/jennifermogan" title="LinkedIn"><i class="fa fa-print" aria-hidden="true"></i></a></li>-->
-          <!-- <li><a href="//linkedin.com/in/jennifermogan" title="LinkedIn"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li> -->
-
-        </ul>
+        <h1 id="user-name"></h1>
+        <h4 id="user-email"></h4>
+        <h4 id="user-address"></h4>
+        <h4 id="user-contact"></h4>
+        <h4 id="user-applyingAs"></h4>
       </div>
       <div class="clear"></div>
     </div>
 
-    <div id="mainArea" class="quickFade delayFive">
+    <div id="mainArea">
 
       <section>
         <article>
@@ -103,6 +95,17 @@
     </div>
   </div>
 
+  <div class="buttonDownloadContainer">
+    <br>
+    <br>
+    <br>
+    <br>
+    <a id="printCVBtn" class="buttonDownload">Download</a>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 
   <!--  ---------------------------------------------------------------------------- -->
   <!-- Script -->
@@ -110,8 +113,25 @@
 
   <script src="js/jquery.storage.js"></script>
   <script src="js/storageCall.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="/js/html2canvas.js"></script>
   <script>
+    // print script
+    $("#printCVBtn").click(function () {
+
+      var cvHeight = $("#cv").outerHeight(true);
+
+      const filename = 'cv.pdf';
+
+      html2canvas(document.querySelector('#cv'), {
+        height: cvHeight + 300
+      }).then(canvas => {
+        let pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+        pdf.save(filename);
+      });
+    });
+
     // work experience
     $.each($.localStorage('job'), function (i) {
       $("#user-work-experience").append(
@@ -138,7 +158,8 @@
     // education
     $.each($.localStorage('instituteName'), function (i) {
       $("#user-education").append(
-        '<article><h2>'+$.localStorage('instituteName')[i]+'</h2><p class="subDetails">'+$.localStorage('degreeName')[i]+'</p></article>'
+        '<article><h2>' + $.localStorage('instituteName')[i] + '</h2><p class="subDetails">' + $.localStorage(
+          'degreeName')[i] + '</p></article>'
       );
     });
   </script>
