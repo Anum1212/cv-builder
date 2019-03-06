@@ -6,12 +6,12 @@ body, .header h2 {
     font-family: 'Raleway', serif;
   }
   
-  body {
-    height: 245mm;
-    width: 180mm;
-    margin-left: auto;
+  #cv {
+    width: 960px;
+    margin-left: 60px;
     margin-right: auto;
     padding: 1em;
+    padding-left: 60px;
     color: #333;
     font-size: 14px;
   }

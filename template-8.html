@@ -78,7 +78,8 @@
       const filename = 'cv.pdf';
 
       html2canvas(document.querySelector('#cv'), {
-        height: cvHeight + 300
+        width: 1080,
+        height: cvHeight + 200
       }).then(canvas => {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);

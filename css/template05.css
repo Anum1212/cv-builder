@@ -42,7 +42,7 @@ a:hover {
 
 article {
     line-height: 1.5;
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
     color: #333;
 }
 

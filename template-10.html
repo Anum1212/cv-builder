@@ -4,14 +4,13 @@
 <head>
 	<title>CV-Template 10</title>
 	<script src="https://use.fontawesome.com/334b91c43a.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="css/template10.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="css/downloadButton.css">
 	<script src="js/jquery.js"></script>
 </head>
 
 <body>
-	<div id="cv" class="container">
+	<div id="cv">
 		<div class="sidebar">
 			<div class="sidebar-top">
 				<img id="user-image" class="profile-image" src="" />
@@ -83,11 +82,15 @@
 		// print script
 		$("#printCVBtn").click(function () {
 
+			var cvWidth = $("#cv").outerWidth(true);
 			var cvHeight = $("#cv").outerHeight(true);
+
 			const filename = 'cv.pdf';
 
 			html2canvas(document.querySelector('#cv'), {
-				height: cvHeight + 300
+				x: 170,
+				width: cvWidth - 200,
+				height: cvHeight + 100
 			}).then(canvas => {
 				let pdf = new jsPDF('p', 'mm', 'a4');
 				pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);

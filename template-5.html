@@ -67,12 +67,15 @@
     // print script
     $("#printCVBtn").click(function () {
 
+      var cvWidth = $("#cv").outerWidth(true);
       var cvHeight = $("#cv").outerHeight(true);
 
       const filename = 'cv.pdf';
 
       html2canvas(document.querySelector('#cv'), {
-        height: cvHeight + 300
+        x: 200,
+        width: cvWidth - 400,
+        height: cvHeight + 200
       }).then(canvas => {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);

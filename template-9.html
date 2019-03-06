@@ -12,8 +12,8 @@
 </head>
 
 <body>
-  <div id="cv" class="resume-wrapper">
-    <article class="paper">
+  <div class="resume-wrapper">
+    <article id="cv" class="paper">
       <header>
         <div class="header-content">
           <div class="header-pic" title="Wiggle Wiggle">
@@ -116,12 +116,14 @@
     // print script
     $("#printCVBtn").click(function () {
 
+      var cvWidth = $("#cv").outerWidth(true);
       var cvHeight = $("#cv").outerHeight(true);
 
       const filename = 'cv.pdf';
 
       html2canvas(document.querySelector('#cv'), {
-        height: cvHeight + 300
+        width: cvWidth - 0,
+        height: cvHeight
       }).then(canvas => {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);

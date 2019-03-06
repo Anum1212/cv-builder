@@ -53,16 +53,20 @@
         <div class="row">
           <ul id="user-skill"></ul>
         </div><!-- /row -->
-
         <h3>Languages</h3>
-        <ul id="user-language"></ul>
-  </div><!-- /row -->
+        <div class="row">
+          <ul id="user-language"></ul>
+        </div><!-- /row -->
+        <div class="row">
+          <h3>Education</h3>
+          <div class="row" id="user-education"></div>
+        </div>
 
-  <h3>Education</h3>
-  <div class="row" id="user-education"></div>
 
-  </section><!-- /beta -->
-  </section><!-- /columns -->
+
+
+      </section><!-- /beta -->
+    </section><!-- /columns -->
   </div><!-- /wrapper -->
 
   <div class="buttonDownloadContainer">
@@ -90,12 +94,14 @@
     // print script
     $("#printCVBtn").click(function () {
 
+      var cvWidth = $("#cv").outerWidth(true);
       var cvHeight = $("#cv").outerHeight(true);
 
       const filename = 'cv.pdf';
 
       html2canvas(document.querySelector('#cv'), {
-        height: cvHeight + 300
+        width: cvWidth - 300,
+        height: cvHeight
       }).then(canvas => {
         let pdf = new jsPDF('p', 'mm', 'a4');
         pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
